@@ -1,11 +1,11 @@
-import db from "../../../libs/db"
+import database from "../../../library/connection"
 
 const handler = async(request, response) => {
     if (request.method !== "GET") response.status(405).end()
 
     const { id } = request.query
 
-    const selectedUsers = await db("posts").where({ id }).first()
+    const selectedUsers = await database("posts").where({ id }).first()
 
     response.status(200)
     response.json({

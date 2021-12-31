@@ -1,4 +1,4 @@
-import db from "../../../libs/db"
+import database from "../../../library/connection"
 
 const handler = async(request, response) => {
     if (request.method !== "POST") response.status(405).end()
@@ -7,12 +7,12 @@ const handler = async(request, response) => {
 
     const { title, content } = request.body
 
-    const createPost = await db("posts").insert({
+    const createPost = await database("posts").insert({
         title: title,
         content: content
     })
 
-    const postCreated = await db("posts").where("id", createPost).first()
+    const postCreated = await database("posts").where("id", createPost).first()
 
     response.status(200)
     response.json({
