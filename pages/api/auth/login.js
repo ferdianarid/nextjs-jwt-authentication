@@ -1,4 +1,4 @@
-import db from "../../../libs/db"
+import database from "../../../library/connection"
 import bcrypt from "bcryptjs"
 
 import jwt from "jsonwebtoken"
@@ -8,11 +8,11 @@ const handler = async(request, response) => {
 
     const { email, password } = request.body
 
-    const checkUsers = await db("users").where({ email }).first()
+    const checkUsers = await database("users").where({ email }).first()
 
     if (!checkUsers) response.status(401).end()
 
-    const checkPassword = await bcrypt.compare(password, checkUsers.password)
+    const passwordValidated = await bcrypt.compare(password, checkUsers.password)
 
     const tokens = jwt.sign({
         id: checkUsers.id,
@@ -25,9 +25,9 @@ const handler = async(request, response) => {
     response.status(200)
     response.json({
         message: "Users available",
-        data: checkUsers,
+        database: checkUsers,
         token: tokens,
-        checkPassword: checkPassword
+        passwordValidated: passwordValidated
     })
 }
 
