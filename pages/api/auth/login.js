@@ -1,6 +1,10 @@
 import database from "../../../library/connection"
 import bcrypt from "bcryptjs"
 
+require("dotenv/config")
+
+const SECRET_KEY = process.env.SECRET_KEY
+
 import jwt from "jsonwebtoken"
 
 const handler = async(request, response) => {
@@ -18,7 +22,7 @@ const handler = async(request, response) => {
         id: checkUsers.id,
         user: checkUsers.name,
         email: checkUsers.email
-    }, "ferdianreni", {
+    }, SECRET_KEY, {
         expiresIn: "7d"
     })
 
