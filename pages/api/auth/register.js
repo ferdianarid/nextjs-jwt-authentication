@@ -1,4 +1,4 @@
-import db from "../../../libs/db"
+import database from "../../../library/connection"
 import bcrypt from "bcryptjs"
 
 const handler = async(request, response) => {
@@ -10,13 +10,13 @@ const handler = async(request, response) => {
 
     const passwordHash = bcrypt.hashSync(password, salt)
 
-    const createUsers = await db("users").insert({
+    const createUsers = await database("users").insert({
         name: name,
         email: email,
         password: passwordHash
     })
 
-    const previewUsers = await db("users").where({ id: createUsers }).first()
+    const previewUsers = await database("users").where({ id: createUsers }).first()
 
     response.status(200)
     response.json({
