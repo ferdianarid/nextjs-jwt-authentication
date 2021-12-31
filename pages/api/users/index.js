@@ -1,9 +1,9 @@
-import db from "../../../libs/db"
+import database from "../../../library/connection"
 
 const handler = async(request, response) => {
     if (request.method !== "GET") response.status(405).end()
 
-    const users = await db("users")
+    const users = await database("users")
 
     response.status(200)
     response.json({
