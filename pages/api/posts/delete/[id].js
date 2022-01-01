@@ -1,7 +1,11 @@
 import database from "../../../../library/connection"
+import authorizeToken from "../../../../middlewares/AuthToken"
 
 const handler = async(request, response) => {
     if (request.method !== "DELETE") response.status(405).end()
+
+    const auth = await authorizeToken(request, response)
+    console.log(auth);
 
     const { id } = request.query
 
