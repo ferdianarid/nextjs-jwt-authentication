@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 
-import { SuccessToaster, LoadingToaster } from '../../components/SuccessToaster'
+import { SuccessToaster, LoadingToaster } from '../../components/Toaster'
 
 const Register = () => {
        const [ identity, setIdentity ] = useState({
@@ -12,7 +12,7 @@ const Register = () => {
 
        const [ notification, setNotification ] = useState("")
 
-       const handlerRegister = async(event) => {
+       const RegisterHandler = async(event) => {
               event.preventDefault()
 
               setNotification(<LoadingToaster>Loading ...</LoadingToaster>)
@@ -42,7 +42,7 @@ const Register = () => {
        }
 
        const inputHandler = (event) => {
-              const name = event.target.getAttribute('name')
+              const name = event.target.getAttribute("name")
               setIdentity({
                      ...identity,
                      [name]: event.target.value
@@ -52,9 +52,9 @@ const Register = () => {
               <React.Fragment>
                      <Head>
                             <title>Ferdian - Register Page</title>
-                            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+                            <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
                             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                            <meta http-equiv="X-UA-Compatible" content="IE-Edge" />
+                            <meta httpEquiv="X-UA-Compatible" content="IE-Edge" />
                             <meta name="description" content="nextjs auth" />
                      </Head>
                      {/* <!-- Heading Login Form --> */}
@@ -63,7 +63,7 @@ const Register = () => {
                             <p className="text-small text-gray-500 font-normal pt-2">Join and get easy way experience to manage your business!</p>	
                      </div>
                      {/* <!-- Login Form --> */}
-                     <form onSubmit={handlerRegister.bind(this)} className="max-w-sm m-auto mt-8 mb-8 rounded-lg border border-gray-300 py-8 px-10" action="" method="">
+                     <form onSubmit={RegisterHandler.bind(this)} className="max-w-sm m-auto mt-8 mb-8 rounded-lg border border-gray-300 py-8 px-10" action="" method="">
                             {/* <!-- Form Full Name --> */}
                             <div className="mb-4">
                                    <label htmlFor="name" className="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
